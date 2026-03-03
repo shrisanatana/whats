@@ -312,6 +312,7 @@ app.whenReady().then(() => {
           provider: settings.aiProvider,
           apiKey,
           message: input.message,
+          settings,
           memory: memoryRows
         })
         return ok({ text })
@@ -339,6 +340,7 @@ app.whenReady().then(() => {
           provider: settings.aiProvider,
           apiKey,
           stats,
+          settings,
           recentContacts: [], // could add last 10 contacts here
           memory: memoryRows
         })
@@ -378,6 +380,7 @@ app.whenReady().then(() => {
           provider: settings.aiProvider,
           apiKey,
           chatName: input.chatId,
+          settings,
           messages: msgs,
           memory: memoryRows
         })

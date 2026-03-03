@@ -72,6 +72,28 @@ export function SettingsPage() {
               ) : null}
             </label>
 
+            {settings?.aiProvider === 'gemini' && (
+              <label className="block animate-in fade-in duration-300">
+                <div className="text-xs text-neutral-400">Gemini Model</div>
+                <select
+                  className="mt-1 w-full rounded-md border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm"
+                  disabled={loading || !settings}
+                  value={settings?.geminiModel ?? 'gemini-1.5-flash'}
+                  onChange={(e) => update({ geminiModel: e.target.value as any })}
+                >
+                  <option value="gemini-3-flash">Gemini 3 Flash</option>
+                  <option value="gemini-3-flash-preview">Gemini 3 Flash Preview</option>
+                  <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                  <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                  <option value="gemini-2-flash">Gemini 2 Flash</option>
+                  <option value="gemini-2-flash-exp">Gemini 2 Flash (Experimental)</option>
+                  <option value="gemini-2-flash-lite">Gemini 2 Flash Lite</option>
+                  <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                  <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                </select>
+              </label>
+            )}
+
             <label className="block">
               <div className="text-xs text-neutral-400">Tone</div>
               <select

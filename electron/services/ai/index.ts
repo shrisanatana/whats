@@ -6,7 +6,7 @@ import { openaiSuggestReply } from './openai'
 export async function suggestReply(args: {
   provider: AiProvider
   apiKey: string
-  settings: Pick<AppSettings, 'tone' | 'language'>
+  settings: Pick<AppSettings, 'tone' | 'language' | 'geminiModel'>
   messages: ChatMessage[]
   memory?: AiMemoryItem[]
 }) {
@@ -17,13 +17,14 @@ export async function suggestReply(args: {
     memory: args.memory
   })
 
-  return executePrompt(args.provider, args.apiKey, prompt)
+  return executePrompt(args.provider, args.apiKey, prompt, args.settings)
 }
 
 export async function assistantChat(args: {
   provider: AiProvider
   apiKey: string
   message: string
+  settings?: Pick<AppSettings, 'geminiModel'>
   memory?: AiMemoryItem[]
 }) {
   const prompt = buildAssistantChatPrompt({
@@ -31,13 +32,14 @@ export async function assistantChat(args: {
     memory: args.memory
   })
 
-  return executePrompt(args.provider, args.apiKey, prompt)
+  return executePrompt(args.provider, args.apiKey, prompt, args.settings)
 }
 
 export async function scoreLead(args: {
   provider: AiProvider
   apiKey: string
   chatName: string
+  settings?: Pick<AppSettings, 'geminiModel'>
   messages: ChatMessage[]
   memory?: AiMemoryItem[]
 }) {
@@ -47,7 +49,7 @@ export async function scoreLead(args: {
     memory: args.memory
   })
 
-  const raw = await executePrompt(args.provider, args.apiKey, prompt)
+  const raw = await executePrompt(args.provider, args.apiKey, prompt, args.settings)
   try {
     return JSON.parse(raw) as { score: number; status: string; statusReason: string }
   } catch {
@@ -59,6 +61,7 @@ export async function getInsights(args: {
   provider: AiProvider
   apiKey: string
   stats: any
+  settings?: Pick<AppSettings, 'geminiModel'>
   recentContacts: any[]
   memory?: AiMemoryItem[]
 }) {
@@ -68,12 +71,12 @@ export async function getInsights(args: {
     memory: args.memory
   })
 
-  return executePrompt(args.provider, args.apiKey, prompt)
+  return executePrompt(args.provider, args.apiKey, prompt, args.settings)
 }
 
-async function executePrompt(provider: AiProvider, apiKey: string, prompt: string) {
+async function executePrompt(provider: AiProvider, apiKey: string, prompt: string, settings?: Pick<AppSettings, 'geminiModel'>) {
   if (provider === 'gemini') {
-    return geminiSuggestReply({ apiKey, prompt })
+    return geminiSuggestReply({ apiKey, prompt, model: settings?.geminiModel })
   }
   return openaiSuggestReply({ apiKey, prompt })
 }

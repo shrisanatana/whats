@@ -11,6 +11,7 @@ export function getDefaultSettings(): AppSettings {
     aiProvider: 'openai',
     tone: 'professional',
     language: 'en',
+    geminiModel: 'gemini-1.5-flash',
     autoReplyEnabled: false,
     hasOpenAIKey: false,
     hasGeminiKey: false,
@@ -73,6 +74,7 @@ export function updateSettings(
     aiProvider: next.aiProvider,
     tone: next.tone,
     language: next.language,
+    geminiModel: next.geminiModel,
     autoReplyEnabled: next.autoReplyEnabled
   })
   return loadSettings(db)

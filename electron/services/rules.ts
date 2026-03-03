@@ -54,6 +54,7 @@ export async function handleIncomingMessage(
             provider: settings.aiProvider,
             apiKey,
             message: `Check if this customer message matches the intent: "${r.keyword}". Message: "${msg.body}". Output ONLY "YES" or "NO".`,
+            settings
           })
           if (aiRes.trim().toUpperCase().includes('YES')) triggered = true
         }

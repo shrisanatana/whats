@@ -42,3 +42,4 @@ Thumbs.db
 # Sensitive files (auto-detected)
 dist-electron
 node_modules
+.wwebjs_cache/

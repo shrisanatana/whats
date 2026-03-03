@@ -6,8 +6,20 @@ export type AiProvider = 'openai' | 'gemini'
 export type Tone = 'friendly' | 'professional' | 'aggressive_sales'
 export type Language = 'en' | 'hi' | 'mr'
 
+export type GeminiModel =
+  | 'gemini-3-flash'
+  | 'gemini-3-flash-preview'
+  | 'gemini-2.5-flash'
+  | 'gemini-2.5-pro'
+  | 'gemini-2-flash'
+  | 'gemini-2-flash-exp'
+  | 'gemini-2-flash-lite'
+  | 'gemini-1.5-flash'
+  | 'gemini-1.5-pro'
+
 export type AppSettings = {
   aiProvider: AiProvider
+  geminiModel?: GeminiModel
   tone: Tone
   language: Language
   autoReplyEnabled: boolean
