@@ -1,6 +1,8 @@
 node_modules
 dist
 dist-electron
+data/
+out/
 .DS_Store
 *.log
 
@@ -40,4 +42,3 @@ Thumbs.db
 # Sensitive files (auto-detected)
 dist-electron
 node_modules
-
